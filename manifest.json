@@ -5,9 +5,22 @@
   "version": "0.1.0",
   "description": "Allow an easy way to start a dialect Jenkins test.",
  
+  // Content scripts are files that run in the context of web pages. 
+  // https://developer.chrome.com/extensions/content_scripts
   "content_scripts": [{
     "js": ["content.js"],
     "matches": ["https://github.com/looker/helltool/pull/*"]
-  }]
+  }],
+
+  "author": "Farid Zakaria <farid.zakaria@looker.com>",
+
+  // An array of strings specifying the paths of packaged resources that are
+  // expected to be usable in the context of a web page.
+  // These paths are relative to the package root, and may contain wildcards.
+  // https://developer.chrome.com/extensions/manifest/web_accessible_resources
+  "web_accessible_resources": [
+    "*.js",
+    "*.html"
+  ]
  
 }
