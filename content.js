@@ -23,6 +23,8 @@ function dialectTestFormSubmit(event) {
     }
 
     closeDialectModalDialog();
+
+    makeCommentButtonClickable();
 }
 
 /*
@@ -34,6 +36,12 @@ function dialectTestFormSubmit(event) {
 function closeDialectModalDialog() {
     let dialectModalDialog = document.getElementById('dialect-modal-dialog');
     dialectModalDialog.removeAttribute('open');
+}
+
+function makeCommentButtonClickable() {
+    let commentButton = Array.from(document.querySelectorAll('button'))
+                             .find(el => el.textContent.trim() === 'Comment');
+    commentButton.removeAttribute('disabled');
 }
 
 const url = chrome.runtime.getURL('dialect.html');
