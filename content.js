@@ -1,15 +1,15 @@
 
 
 function dialectTestFormSubmit(event) {
-    if (e) {
-        e.preventDefault();
+    if (event) {
+        event.preventDefault();
     }
     // get the DOM element for the <textarea> for the comment
     var commentTextArea = document.getElementById('new_comment_field');
     var dialectSelectInput = document.getElementById('name-text');
 
     let selectedDialects = [...dialectSelectInput.options].filter(option => option.selected).map(option => option.value)
-    commentTextArea.value =`CI:DIALECTS[${selectedDialects.join(' ')}]`
+    commentTextArea.value = `CI:DIALECTS[${selectedDialects.join(' ')}]`
 }
 
 var commentFormActions = document.getElementById('partial-new-comment-form-actions');
@@ -28,7 +28,7 @@ innerDivs[0].insertAdjacentHTML('beforeend',
                     </svg>
                 </button>
                 <h3 class="Box-title f5 text-bold text-gray-dark">Start Dialect Integration Test</h3>
-                <form id="dialect-test-form" onsubmit="dialectTestFormSubmit()">
+                <form id="dialect-test-form">
                     <dl class="form-group">
                         <dt><label for="name-text">Dialect Type</label></dt>
                         <dt>
@@ -52,7 +52,7 @@ innerDivs[0].insertAdjacentHTML('beforeend',
                     </dl>
 
                     <div class="form-actions">
-                        <button type="input" class="btn btn-primary">Comment</button
+                        <button id="dialect-button-comment" type="input" class="btn btn-primary">Comment</button
                     </div>
                 </form>
             </div>
@@ -61,3 +61,5 @@ innerDivs[0].insertAdjacentHTML('beforeend',
 </div>
 `
 );
+
+document.getElementById("dialect-button-comment").addEventListener("click", dialectTestFormSubmit);
