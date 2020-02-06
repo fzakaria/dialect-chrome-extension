@@ -1,0 +1,22 @@
+name: PullRequest Validation
+# This workflow is triggered on changes to pull request.
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: Linter
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Run Makefile
+        run: make
