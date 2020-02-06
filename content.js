@@ -16,10 +16,10 @@ function dialectTestFormSubmit(event) {
     commentTextArea.value += `CI:DIALECTS` + (selectedDialects.includes("all") ? "" : `[${selectedDialects.join(' ')}]`) + "\n"
 
     let dialectTestFilename = document.getElementById('dialect-test-name').value.trim();
-    let dialectTestRegex = document.getElementById('dialect-test-name').value.trim();
+    let dialectTestRegex = document.getElementById('dialect-test-regex').value.trim();
 
     if (dialectTestFilename.length != 0) {
-        commentTextArea.value += `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/` + "\n"
+        commentTextArea.value += `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/]` + "\n"
     }
 
     closeDialectModalDialog();
@@ -28,7 +28,7 @@ function dialectTestFormSubmit(event) {
 }
 
 /*
- * GitHub uses CSS Pure https://purecss.io/
+ * GitHub uses CSS Primer Library https://primer.style/css/
  * The modal dialog is built using https://github.com/github/details-dialog-element
  * You "should" be able to hide it simply by calling 'toggle' however it does not seem to work.
  * This just ends up doing the same code as toggle.
