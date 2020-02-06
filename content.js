@@ -16,10 +16,10 @@ function dialectTestFormSubmit(event) {
     commentTextArea.value += `CI:DIALECTS` + (selectedDialects.includes("all") ? "" : `[${selectedDialects.join(' ')}]`) + "\n"
 
     let dialectTestFilename = document.getElementById('dialect-test-name').value.trim();
-    let dialectTestRegex = document.getElementById('dialect-test-name').value.trim();
+    let dialectTestRegex = document.getElementById('dialect-test-regex').value.trim();
 
     if (dialectTestFilename.length != 0) {
-        commentTextArea.value += `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/` + "\n"
+        commentTextArea.value += `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/]` + "\n"
     }
 
     closeDialectModalDialog();
