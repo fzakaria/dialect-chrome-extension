@@ -1,5 +1,8 @@
+PRETTIER := $(shell yarn bin prettier)
+
 js-lint: $(wildcard *.js)
-	@prettier --write $^
+	@echo $(PRETTIER)
+	$(PRETTIER) --write $^
 
 
 .PHONY: js-lint
