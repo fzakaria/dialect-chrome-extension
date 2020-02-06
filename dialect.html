@@ -1,42 +1,82 @@
 <div class="bg-gray-light ml-1">
+
     <details id="dialect-modal-dialog" class="js-user-status-details details-reset details-overlay details-overlay-dark">
-        <summary class="btn btn-primary">Dialect Test</summary>
+
+        <summary class="btn btn-outline">Dialects</summary>
+
         <details-dialog class="details-dialog rounded-1 anim-fade-in fast Box Box--overlay">
+
             <div class="Box-header bg-gray border-bottom p-3">
+
                 <button id="dialect-modal-close-button" class="Box-btn-octicon js-toggle-user-status-edit btn-octicon float-right" type="reset" aria-label="Close dialog" data-close-dialog="">
                     <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
                         <path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path>
                     </svg>
                 </button>
-                <h3 class="Box-title f5 text-bold text-gray-dark">Start Dialect Integration Test</h3>
+
+                <h3 class="Box-title f5 text-bold text-gray-dark">Run XDialect Tests</h3>
+
                 <form id="dialect-test-form">
                     <dl class="form-group">
-                        <dt><label for="name-text">Dialect Type</label></dt>
+                        <dt><label for="name-text">Dialect Connection</label></dt>
                         <dt>
-                            <!-- These dialects should match the key in test_databases.yml in Looker -->
-                            <select multiple name="dialect" id="dialect-name-text" class="form-select">
-                              <option value="all">All</option>
-                              <option value="oracle">Oracle</option>
-                              <option value="redshift">Redshift</option>
-                              <option value="postgres9_5">Postgres 9.5</option>
-                              <option value="mysql">MySQL</option>
-                              <option value="greenplum">Greenplum</option>
-                              <option value="vertica">Vertica</option>
-                              <option value="hive2">Hive 2</option>
-                              <option value="hive3">Hive 3</option>
-                              <option value="impala">Impala</option>
-                              <option value="impala_6_1">Impala 6.1</option>
-                              <option value="impala_native">Impala Native</option>
-                              <option value="blinkdb">Blink</option>
-                              <option value="mssqldw">Azure SQL Data Warehouse </option>
-                              <option value="aurora">AWS Aurora</option>
-                              <option value="mariadb">Maria</option>
-                              <option value="mssql">SQL Server</option>
-                              <option value="postgres9_1">Postgres 9.1</option>
-                              <option value="bigquery">BigQuery Legacy</option>
-                              <option value="bigquery_standard_sql">BigQuery Standard SQL</option>
-                              <option value="mysql">MySQL</option>
-                              <option value="presto">Presto</option>
+                            <!-- These values must match the keys in test/test_databases.yml in Helltool -->
+                            <select multiple name="dialect" id="dialect-name-text" class="form-select" required size=15>
+                                <option value="all">all</option>
+                                <option value="actian_avalanche">actian_avalanche</option>
+                                <option value="athena">athena</option>
+                                <option value="aurora">aurora</option>
+                                <option value="azure_postgres">azure_postgres</option>
+                                <option value="bigquery">bigquery</option>
+                                <option value="bigquery_standard_sql">bigquery_standard_sql</option>
+                                <option value="blinkdb">blinkdb</option>
+                                <option value="clickhouse">clickhouse</option>
+                                <option value="clustrix">clustrix</option>
+                                <option value="dashdb">dashdb</option>
+                                <option value="datavirtuality">datavirtuality</option>
+                                <option value="db2">db2</option>
+                                <option value="denodo">denodo</option>
+                                <option value="denodo7">denodo7</option>
+                                <option value="dremio">dremio</option>
+                                <option value="druid">druid</option>
+                                <option value="druid13">druid13</option>
+                                <option value="exasol">exasol</option>
+                                <option value="google_cloud_postgres">google_cloud_postgres</option>
+                                <option value="googlecloudsql">googlecloudsql</option>
+                                <option value="greenplum">greenplum</option>
+                                <option value="hana">hana</option>
+                                <option value="hive2">hive2</option>
+                                <option value="hive3">hive3</option>
+                                <option value="hypersql">hypersql</option>
+                                <option value="impala">impala</option>
+                                <option value="impala_6_1">impala_6_1</option>
+                                <option value="impala_native">impala_native</option>
+                                <option value="mariadb">mariadb</option>
+                                <option value="memsql">memsql</option>
+                                <option value="mongobi">mongobi</option>
+                                <option value="msazuresql">msazuresql</option>
+                                <option value="mssql">mssql</option>
+                                <option value="mssql_2014">mssql_2014</option>
+                                <option value="mssql_2016">mssql_2016</option>
+                                <option value="mssql_2017">mssql_2017</option>
+                                <option value="mssqldw">mssqldw</option>
+                                <option value="mysql">mysql</option>
+                                <option value="mysql_8">mysql_8</option>
+                                <option value="netezza">netezza</option>
+                                <option value="oracle">oracle</option>
+                                <option value="postgres9_1">postgres9_1</option>
+                                <option value="postgres9_5">postgres9_5</option>
+                                <option value="presto">presto</option>
+                                <option value="qubole_presto">qubole_presto</option>
+                                <option value="qubole_presto_gcp">qubole_presto_gcp</option>
+                                <option value="redshift">redshift</option>
+                                <option value="snowflake">snowflake</option>
+                                <option value="spark_1_6">spark_1_6</option>
+                                <option value="spark_2_0">spark_2_0</option>
+                                <option value="spark_2_3">spark_2_3</option>
+                                <option value="teradata">teradata</option>
+                                <option value="vector">vector</option>
+                                <option value="vertica">vertica</option>
                             </select>
                         </dt>
                     </dl>
@@ -49,16 +89,20 @@
                             <input id="dialect-test-name" type="text" name="test" value="" placeholder="test/unit/ht/test_ht_dialect_sql.rb" class="form-control input-monospace" >
                         </dt>
                         <dt>
-                            <dt><label for="name-text">Test Regex</label></dt>
-                            <input id="dialect-test-regex" type="text" name="filter" value="" placeholder="/works for a trivial materialization/" class="form-control input-monospace" >
+                            <dt><label for="name-text">Test Regex Filter</label></dt>
+                            <input id="dialect-test-regex" type="text" name="filter" value="" placeholder="works for a trivial materialization" class="form-control input-monospace" >
                         </dt>
                     </dl>
 
                     <div class="form-actions">
-                        <button id="dialect-button-comment" type="input" class="btn btn-primary">Insert Comment</button>
+                        <button id="dialect-button-comment" type="input" class="btn btn-primary">Generate Comment</button>
                     </div>
                 </form>
+
             </div>
+
         </details-dialog>
+
     </details>
+
 </div>
