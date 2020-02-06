@@ -28,7 +28,7 @@ function dialectTestFormSubmit(event) {
 }
 
 /*
- * GitHub uses CSS Pure https://primer.style/css/
+ * GitHub uses CSS Primer Library https://primer.style/css/
  * The modal dialog is built using https://github.com/github/details-dialog-element
  * You "should" be able to hide it simply by calling 'toggle' however it does not seem to work.
  * This just ends up doing the same code as toggle.
