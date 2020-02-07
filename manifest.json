@@ -2,22 +2,20 @@
   "manifest_version": 2,
 
   "name": "Looker Dialect PullRequest Button",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Allow an easy way to start a dialect Jenkins test.",
 
-  "content_scripts": [{
-    "js": ["content.js"],
-    "matches": ["https://github.com/looker/helltool/pull/*"]
-  }],
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["https://github.com/looker/helltool/pull/*"]
+    }
+  ],
 
   "authors": [
     "Farid Zakaria <farid.zakaria@looker.com>",
     "Noah Kawasaki <noah.kawasaki@looker.com>"
   ],
 
-  "web_accessible_resources": [
-    "*.js",
-    "*.html"
-  ]
-
+  "web_accessible_resources": ["*.js", "*.html"]
 }
