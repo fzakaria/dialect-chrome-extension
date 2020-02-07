@@ -1,4 +1,4 @@
-PRETTIER := $(shell yarn bin prettier)
+PRETTIER = $(shell yarn bin prettier)
 
 all: lint
 
