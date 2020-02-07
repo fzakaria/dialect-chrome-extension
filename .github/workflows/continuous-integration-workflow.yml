@@ -1,4 +1,4 @@
-name: PullRequest Validation
+name: Build
 # This workflow is triggered on changes to pull request.
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
-    name: Build
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
