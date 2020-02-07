@@ -1,6 +1,6 @@
 PRETTIER = $(shell yarn bin prettier)
 
-all: lint
+all: lint release
 
 node_modules: yarn.lock
 	@echo "Installing dependencies"
@@ -16,6 +16,12 @@ htmllint: $(wildcard *.html) node_modules
 
 lint: jslint htmllint
 
-.PHONY: jslint htmllint lint test
+
+dialect-chrome-extension.zip: package.json $(wildcard *.html) $(wildcard *.js)
+	@zip dialect-chrome-extension.zip $^
+
+release: dialect-chrome-extension.zip
+
+.PHONY: jslint htmllint lint release 
 
 .DEFAULT_GOAL: all

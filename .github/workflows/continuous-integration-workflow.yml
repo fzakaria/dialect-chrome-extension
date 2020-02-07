@@ -9,9 +9,8 @@ on:
     - master
 
 jobs:
-  build:
+  lint:
     name: Linter
-    # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -19,6 +18,23 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run Makefile
-        run: make all
+        run: make lint
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Run Makefile
+        run: make release
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: dialect-chrome-extension
+          path: dialect-chrome-extension.zip
