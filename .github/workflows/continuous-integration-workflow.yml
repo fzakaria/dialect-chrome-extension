@@ -20,5 +20,5 @@ jobs:
           fetch-depth: 1
       - name: Run Makefile
         run: |
-          exit 2
+          make
         shell: bash
