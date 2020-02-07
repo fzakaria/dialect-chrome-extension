@@ -19,6 +19,6 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run Makefile
-        run: |
-          make
-        shell: bash
+        run: make all
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
