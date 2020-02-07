@@ -19,4 +19,6 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run Makefile
-        run: make
+        run: |
+          make
+        shell: bash
