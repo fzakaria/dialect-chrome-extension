@@ -22,7 +22,7 @@ htmllint: $(wildcard *.html) node_modules
 
 lint: node_modules jslint htmllint jsonlint
 
-lint-check: $(wildcard *.json) $(wildcard *.html) $(wildcard *.js)
+lint-check: node_modules $(wildcard *.json) $(wildcard *.html) $(wildcard *.js)
 	@echo "Verifying that the script is linted"
 	$(PRETTIER) --check $^ || (echo "prettier failed validating linted $$?"; exit 1)
 
