@@ -14,11 +14,16 @@ Be sure existing development or production extension is not active. You can relo
 ## Development
 
 ```bash
+# this will build a ZIP file and run the lint-check
 make all
 ```
 
 ## Linting
 
 ```bash
-eslint content.js --fix
+# to automatically repair and run the linter
+make lint
+
+# to validate the linting has no errors
+make lint-check
 ```
