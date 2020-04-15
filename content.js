@@ -22,7 +22,8 @@ class CICommandProducer {
         }
 
         cmd += `TEST=\'${this.testFile}\' `;
-        cmd += `FILTER=/${this.testRegexFilter}/]`;
+        cmd += `FILTER=/${this.testRegexFilter}/`;
+        cmd += ']';
         return cmd;
     }
 }
