@@ -9,7 +9,7 @@ A simple chrome extension to make it easier to launch dialect tests
 2. Click to enable `Developer Mode`
 3. Click `Load Unpacked`
 
-Be sure existing development or production extension is not active. 
+Be sure existing development or production extension is not active. You can reload your changes by clicking the reload button on the `chrome://extensions` page. 
 
 ## Development
 
