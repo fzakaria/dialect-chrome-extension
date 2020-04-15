@@ -32,6 +32,7 @@ class PageRepresentation {
     constructor() {}
 
     get selectedDialects() {
+        // collect all selected dialects from the select input
         let dialectSelectInput = document.getElementById("dialect-name-text");
         let selectedDialects = [...dialectSelectInput.options]
             .filter(option => option.selected)
@@ -49,12 +50,14 @@ class PageRepresentation {
     }
 
     get dialectTestFilename() {
+        // collect filename from dialog
         return document
             .getElementById("dialect-test-name")
             .value.trim();
     }
 
     get dialectTestRegex() {
+        // collect regex from dialog
         return document
             .getElementById("dialect-test-regex")
             .value.trim();
