@@ -8,3 +8,9 @@ A simple chrome extension to make it easier to launch dialect tests
 ```bash
 make all
 ```
+
+## Linting
+
+```bash
+eslint content.js --fix
+```

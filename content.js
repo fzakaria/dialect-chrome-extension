@@ -28,7 +28,7 @@ function dialectTestFormSubmit(event) {
     .getElementById("dialect-test-regex")
     .value.trim();
 
-  if (dialectTestFilename.length != 0) {
+  if (dialectTestFilename.length !== 0) {
     commentTextArea.value +=
       `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/]` +
       "\n";
