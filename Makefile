@@ -1,10 +1,12 @@
-PRETTIER = $(shell yarn bin prettier)
+YARN = $(shell npm bin)/yarn
 
-all: lint release
+PRETTIER = $(shell npm bin)/prettier
+
+all: lint-check release
 
 node_modules: yarn.lock
 	@echo "Installing dependencies"
-	@yarn install
+	$(YARN) install
 
 jsonlint: $(wildcard *.json) node_modules
 	@echo "Formatting JSON files: $^"
@@ -18,8 +20,11 @@ htmllint: $(wildcard *.html) node_modules
 	@echo "Formatting Javascript files: $^"
 	$(PRETTIER) --write $^
 
-lint: jslint htmllint jsonlint
+lint: node_modules jslint htmllint jsonlint
 
+lint-check: node_modules $(wildcard *.json) $(wildcard *.html) $(wildcard *.js)
+	@echo "Verifying that the script is linted"
+	$(PRETTIER) --check $^ || (echo "prettier failed validating linted $$?"; exit 1)
 
 dialect-chrome-extension.zip: manifest.json $(wildcard *.html) $(wildcard *.js)
 	@zip dialect-chrome-extension.zip $^
