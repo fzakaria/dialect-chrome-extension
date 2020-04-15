@@ -28,3 +28,14 @@ jobs:
         with:
           name: dialect-chrome-extension
           path: dialect-chrome-extension.zip
+      - name: Determine Release version
+        run: |
+          export RELEASE_VERSION=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./manifest.json)
+          echo "::set-env RELEASE_VERSION=$RELEASE_VERSION"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: Release ${{ RELEASE_VERSION }}
