@@ -1,0 +1,19 @@
+name: Validate
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  lint:
+    name: Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Run Makefile
+        run: make lint-check
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
