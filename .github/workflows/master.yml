@@ -28,3 +28,25 @@ jobs:
         with:
           name: dialect-chrome-extension
           path: dialect-chrome-extension.zip
+      - name: Determine Release version
+        run: |
+          export RELEASE_VERSION=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./manifest.json)
+          echo "::set-env name=RELEASE_VERSION::$RELEASE_VERSION"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dialect-chrome-extension.zip
+          asset_name: dialect-chrome-extension.zip
+          asset_content_type: application/zip
