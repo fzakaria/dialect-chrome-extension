@@ -1,3 +1,75 @@
+class CICommandProducer {
+  /**
+   *
+   * @param {Array.<string>} [connections] optional list of connections (e,g. `[denodo, exasol]`)
+   * @param testFile {string} optional test file to run (e.g. `test/unit/blah.js`)
+   * @param testRegexFilter {string} optional regex to limit tests that are run (e.g. `cool test foo`)
+   */
+  constructor(connections, testFile, testRegexFilter) {
+    this.connections = connections;
+    this.testFile = testFile;
+    this.testRegexFilter = testRegexFilter;
+  }
+
+  emitCommand() {
+    let cmd;
+    if (!this.connections || this.connections.length === 0) {
+      cmd = "CI:DIALECTS[";
+    } else {
+      cmd = "CI:DIALECT_TEST[(";
+      cmd += this.connections.join(" ");
+      cmd += ") ";
+    }
+
+    if (this.testFile !== "undefined" && this.testFile) {
+      cmd += `TEST=\'${this.testFile}\' `;
+    }
+    if (this.testRegexFilter !== "undefined" && this.testRegexFilter) {
+      cmd += `FILTER=/${this.testRegexFilter}/ `;
+    }
+    cmd += "]";
+    return cmd;
+  }
+}
+
+class PageRepresentation {
+  constructor() {}
+
+  get selectedDialects() {
+    // collect all selected dialects from the select input
+    let dialectSelectInput = document.getElementById("dialect-name-text");
+    let selectedDialects = [...dialectSelectInput.options]
+      .filter(option => option.selected)
+      .map(option => option.value);
+
+    if (
+      selectedDialects &&
+      selectedDialects.length === 1 &&
+      selectedDialects[0] === "all"
+    ) {
+      selectedDialects = [];
+    }
+
+    return selectedDialects;
+  }
+
+  get dialectTestFilename() {
+    // collect filename from dialog
+    return document.getElementById("dialect-test-name").value.trim();
+  }
+
+  get dialectTestRegex() {
+    // collect regex from dialog
+    return document.getElementById("dialect-test-regex").value.trim();
+  }
+
+  setComment(val) {
+    // get the DOM element for the <textarea> for the comment
+    let commentTextArea = document.getElementById("new_comment_field");
+    commentTextArea.value = val;
+  }
+}
+
 /*
  * This function is called when the modal dialogue for dialect tests is submitted.
  */
@@ -5,34 +77,16 @@ function dialectTestFormSubmit(event) {
   if (event) {
     event.preventDefault();
   }
-  // get the DOM element for the <textarea> for the comment
-  let commentTextArea = document.getElementById("new_comment_field");
 
-  // collect all selected dialects from the select input
-  let dialectSelectInput = document.getElementById("dialect-name-text");
-  let selectedDialects = [...dialectSelectInput.options]
-    .filter(option => option.selected)
-    .map(option => option.value);
-  // if 'all' is any of the select dialects than don't use the special syntax to list it out
-  commentTextArea.value +=
-    `CI:DIALECTS` +
-    (selectedDialects.includes("all")
-      ? ""
-      : `[${selectedDialects.join(" ")}]`) +
-    "\n";
+  let pageRepresentation = new PageRepresentation();
 
-  let dialectTestFilename = document
-    .getElementById("dialect-test-name")
-    .value.trim();
-  let dialectTestRegex = document
-    .getElementById("dialect-test-regex")
-    .value.trim();
+  let command = new CICommandProducer(
+    pageRepresentation.selectedDialects,
+    pageRepresentation.dialectTestFilename,
+    pageRepresentation.dialectTestRegex
+  ).emitCommand();
 
-  if (dialectTestFilename.length != 0) {
-    commentTextArea.value +=
-      `CI:DIALECT_TEST[TEST=${dialectTestFilename} FILTER=/${dialectTestRegex}/]` +
-      "\n";
-  }
+  pageRepresentation.setComment(command);
 
   closeDialectModalDialog();
 
@@ -51,10 +105,12 @@ function closeDialectModalDialog() {
 }
 
 function makeCommentButtonClickable() {
-  let commentButton = Array.from(document.querySelectorAll("button")).find(
+  // really annoying but it's tough to find the exact
+  // button we care about
+  let commentButtons = Array.from(document.querySelectorAll("button")).filter(
     el => el.textContent.trim() === "Comment"
   );
-  commentButton.removeAttribute("disabled");
+  commentButtons.forEach(elem => elem.removeAttribute("disabled"));
 }
 
 const url = chrome.runtime.getURL("dialect.html");
