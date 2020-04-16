@@ -21,8 +21,12 @@ class CICommandProducer {
       cmd += ") ";
     }
 
-    cmd += `TEST=\'${this.testFile}\' `;
-    cmd += `FILTER=/${this.testRegexFilter}/`;
+    if (this.testFile !== "undefined" && this.testFile) {
+      cmd += `TEST=\'${this.testFile}\' `;
+    }
+    if (this.testRegexFilter !== "undefined" && this.testRegexFilter) {
+      cmd += `FILTER=/${this.testRegexFilter}/ `;
+    }
     cmd += "]";
     return cmd;
   }
@@ -101,10 +105,12 @@ function closeDialectModalDialog() {
 }
 
 function makeCommentButtonClickable() {
-  let commentButton = Array.from(document.querySelectorAll("button")).find(
+  // really annoying but it's tough to find the exact
+  // button we care about
+  let commentButtons = Array.from(document.querySelectorAll("button")).filter(
     el => el.textContent.trim() === "Comment"
   );
-  commentButton.removeAttribute("disabled");
+  commentButtons.forEach(elem => elem.removeAttribute("disabled"));
 }
 
 const url = chrome.runtime.getURL("dialect.html");
