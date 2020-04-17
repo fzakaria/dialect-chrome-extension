@@ -14,9 +14,9 @@ class CICommandProducer {
   emitCommand() {
     let cmd;
     if (!this.connections || this.connections.length === 0) {
-      cmd = "CI:DIALECTS[";
+      cmd = "CI:DIALECT_TEST[";
     } else {
-      cmd = "CI:DIALECT_TEST[(";
+      cmd = "CI:DIALECTS[(";
       cmd += this.connections.join(" ");
       cmd += ") ";
     }
