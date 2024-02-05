@@ -3,6 +3,6 @@
     "prettier": "1.19.1"
   },
   "dependencies": {
-    "yarn": "^1.22.4"
+    "yarn": "^1.22.13"
   }
 }
